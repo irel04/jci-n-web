@@ -5,9 +5,11 @@ const Layout = () => {
 	return (
 		<div className="h-screen w-screen bg-app-white dark:bg-neutral-800">
 			{/* Wrapper */}
-			<div className="w-full h-full max-w-[2560px] mx-auto border-red-500 border-2">
+			<div className="w-full h-full max-w-[2560px] mx-auto">
 				<Header/>
-				<Outlet />
+				<div className="p-4">
+					<Outlet />
+				</div>
 			</div>
 		</div>
 	)
