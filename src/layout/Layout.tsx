@@ -1,10 +1,12 @@
+import { Header } from "@src/components"
 import { Outlet } from "react-router"
 
 const Layout = () => {
 	return (
-		<div className="min-h-screen w-screen">
+		<div className="h-screen w-screen bg-app-white dark:bg-neutral-800">
 			{/* Wrapper */}
-			<div className="w-full max-w-[2560px] p-4 mx-auto border-red-500 border-2">
+			<div className="w-full h-full max-w-[2560px] mx-auto border-red-500 border-2">
+				<Header/>
 				<Outlet />
 			</div>
 		</div>

@@ -25,9 +25,10 @@
     /* paths */
     "baseUrl": ".",
     "paths": {
-      "@src/*": ["src/*"]
+      "@src/*": ["src/*"],
+      "@public/*": ["public/*"]
     }
   
   },
-  "include": ["src"]
+  "include": ["src", "public"]
 }
