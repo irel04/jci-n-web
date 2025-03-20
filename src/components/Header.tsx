@@ -4,7 +4,7 @@ import faqs from "@src/assets/icons/faqs.svg"
 
 function Header() {
 	return (
-		<header className="flex py-4 px-8 items-center font-header gap-4 shadow">
+		<header className="flex-none flex py-4 px-8 items-center font-header gap-4 shadow">
 			<div className="flex-1">
 				<button className="bg-neutral-500/50 p-4  w-36 text-center rounded-md text-white">Logo Icon</button>
 			</div>
