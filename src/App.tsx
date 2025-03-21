@@ -1,16 +1,21 @@
 import { Route, Routes } from "react-router"
 import { EditProfile, Home } from "@src/pages"
-import { Layout } from "@src/layout"
+import { Layout, PrivateLayout } from "@src/layout"
+import { AuthProvider } from "@src/auth"
 
 function App() {
 
   return (
-    <Routes >
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/edit-profile/:userId" element={<EditProfile/>}/>
-      </Route>
-    </Routes>
+    <AuthProvider>
+      <Routes >
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route element={<PrivateLayout />}>
+            <Route path="/edit-profile/:userId" element={<EditProfile />} />
+          </Route>
+        </Route>
+      </Routes>
+    </AuthProvider>
   )
 }
 
