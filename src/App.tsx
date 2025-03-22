@@ -10,7 +10,7 @@ function App() {
       <Routes >
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/edit-profile/:userId" element={<EditProfile />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
         </Route>
       </Routes>
     </AuthProvider>

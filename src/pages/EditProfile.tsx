@@ -17,23 +17,7 @@ const EditProfile = () => {
 		await logout();
 	};
 
-	const fetchUser = async () => {
-		if (!session) return;
-
-		try {
-			const { data, error } = await supabase
-				.from("users_details")
-				.select("*")
-				.eq("auth_id", session.user.id)
-				.single();
-
-			if (error) throw error;
-
-			setUserData(data as TBaseProfile);
-		} catch (error) {
-			console.error("Supabase error: ", (error as PostgrestError).message);
-		}
-	};
+	
 
 	useEffect(() => {
 		const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
@@ -58,6 +42,25 @@ const EditProfile = () => {
 	});
 
 	useEffect(() => {
+
+		const fetchUser = async () => {
+			if (!session) return;
+
+			try {
+				const { data, error } = await supabase
+					.from("users_details")
+					.select("*")
+					.eq("auth_id", session.user.id)
+					.single();
+
+				if (error) throw error;
+
+				setUserData(data as TBaseProfile);
+			} catch (error) {
+				console.error("Supabase error: ", (error as PostgrestError).message);
+			}
+		};
+		
 		fetchUser();
 	}, [session]);
 
@@ -76,7 +79,7 @@ const EditProfile = () => {
 			<Login isOpen={!session} showCloseButton={false} />
 			<div className="max-w-[500px]">
 				<h1 className="text-xl font-bold md:text-2xl text-brand-700">Edit Profile</h1>
-				<form className="mt-4 flex flex-col gap-6 md:gap-8" onSubmit={handleSubmit(handleSubmitUpdate)}>
+				<form className="mt-4 flex flex-col gap-6 md:gap-8" onSubmit={handleSubmit(handleSubmitUpdate)} autoComplete="off">
 					<div className="grid grid-cols-1 gap-4 md:grid-cols-2 ">
 						<p className="font-semibold md:col-span-2">Personal Details</p>
 						<Input label="First Name" {...register("first_name")} error={errors["first_name"]} />
@@ -89,7 +92,7 @@ const EditProfile = () => {
 					<div className="grid grid-cols-1 gap-1 md:grid-cols-2">
 						<p className="font-semibold md:col-span-2">Security</p>
 						<Input label="Email" {...register("email_address")} error={errors["email_address"]} />
-						<Input label="Password" type="password" {...register("password")} error={errors["password"]} />
+						<Input label="Password" type="password" {...register("password")} error={errors["password"]} autoComplete="new-password" placeholder="***********"/>
 					</div>
 
 					<div className="flex justify-end">
