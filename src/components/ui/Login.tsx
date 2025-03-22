@@ -38,13 +38,17 @@ const Login = ({isOpen, handleClose, showCloseButton=true}: Props) => {
 	}
 
 	useEffect(() => {
-		document.body.classList.add("overflow-hidden")
+		if(isOpen){
+			document.body.classList.add("overflow-hidden")
+		} else {
+			document.body.classList.remove("overflow-hidden")
+		}
 
 		return () => {
 			document.body.classList.remove("overflow-hidden")
 
 		}
-	}, [])
+	}, [isOpen])
 
 	return (
 		<div className={`${isOpen? "fixed" : "hidden" }  inset-0 z-20 bg-black/80 p-4 md:p-8 overflow-auto`}>
@@ -57,7 +61,7 @@ const Login = ({isOpen, handleClose, showCloseButton=true}: Props) => {
 				<form className="flex-1 justify-center items-center flex flex-col gap-4" onSubmit={handleSubmit(handleLogin)}>
 					<Input label="Email" {...register("email")} error={errors["email"]} />
 					<Input type="password" label="Password" {...register("password")} error={errors["password"]}/>
-					<button className="px-4 py-2 bg-brand-300 rounded-md text-app-white max-w-max mx-auto text-sm md:text-base" type="submit">{isLoading ? "Please wait..." : "Continue"}</button>
+					<button className="cursor-pointer px-4 py-2 bg-brand-300 rounded-md text-app-white max-w-max mx-auto text-sm md:text-base" type="submit">{isLoading ? "Please wait..." : "Continue"}</button>
 				</form>
 			</div>
 		</div>
