@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router"
 import { EditProfile, Home } from "@src/pages"
-import { Layout, PrivateLayout } from "@src/layout"
-import { AuthProvider } from "@src/auth"
+import Layout from "@src/layout/Layout"
+import PrivateLayout from "@src/layout/PrivateLayout"
+import AuthProvider from "@src/context/AuthContext"
 
 function App() {
 

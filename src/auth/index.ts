@@ -1,1 +1,0 @@
-export { default as AuthProvider } from "@src/auth/provider/AuthContext"
