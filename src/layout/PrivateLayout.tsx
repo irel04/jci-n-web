@@ -1,4 +1,4 @@
-import { useAuth } from "@src/context/AuthContext"
+import { useAuth } from "@src/context/auth/auth.module"
 import Login from "@src/components/ui/Login"
 import { Outlet } from "react-router"
 

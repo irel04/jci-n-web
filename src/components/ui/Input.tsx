@@ -3,6 +3,7 @@ import { InputHTMLAttributes } from "react"
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 	label?: string, 
 	icon?: string,
+	
 }
 
 const Input = ({ icon, label, ...props }: InputProps) => {

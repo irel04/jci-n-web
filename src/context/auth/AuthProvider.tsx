@@ -1,16 +1,9 @@
+import { AuthContext } from "@src/context/auth/auth.module";
 import { TAuth, TLogin } from "@src/types";
 import supabase from "@src/utils/supabase";
 import { Session } from "@supabase/supabase-js";
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
-
-
-const AuthContext = createContext<TAuth>({
-	login: async () => {},  // Empty function to avoid undefined
-	logout: () => {},
-	session: null,
-  });
-  
 
 type Props = {
 	children: ReactNode
@@ -79,12 +72,6 @@ const AuthProvider = ({ children }: Props) => {
 	</AuthContext.Provider>
 }
 
-export const useAuth = () => {
-	const context = useContext(AuthContext);
-	if (context === undefined) {
-		throw new Error("useAuth must be used within an AuthProvider");
-	}
-	return context;
-};
+
 
 export default AuthProvider;

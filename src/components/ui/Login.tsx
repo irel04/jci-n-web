@@ -1,12 +1,9 @@
 import Input from "@src/components/ui/Input"
 import pupLogo from "@src/assets/pup-logo.png"
-import { useEffect } from "react"
 
 const Login = () => {
 
-	useEffect(() => {
-
-	}, [])
+		
 
 	return (
 		<div className="fixed inset-0 z-20 bg-black/80 p-4 md:p-8">
