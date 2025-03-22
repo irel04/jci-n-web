@@ -7,7 +7,7 @@ export type TLogin = {
 
 export type TAuth = {
 	login: (payload: TLogin, redirectTo:string) => Promise<void>;  // Always required
-	logout: (redirectTo: string) => void;          // Always required
+	logout: (redirectTo?: string) => Promise<void>;          // Always required
 	session?: Session | null;
   };
   

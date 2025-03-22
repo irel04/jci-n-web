@@ -3,7 +3,7 @@ import { createContext, useContext } from "react";
 
 export const AuthContext = createContext<TAuth>({
 	login: async () => { },  // Empty function to avoid undefined
-	logout: () => { },
+	logout: async () => { },
 	session: null,
 });
 

@@ -14,22 +14,19 @@ const AuthProvider = ({ children }: Props) => {
 	const [session, setSession] = useState<Session | null>(null)
 
 	useEffect(() => {
-		const fetchSession = async () => {
-		  const { data } = await supabase.auth.getSession();
-		  setSession(data.session);
-		};
-	
-		fetchSession();
-	
-		const { data: authListener } = supabase.auth.onAuthStateChange(
-		  (_event, newSession) => {
-			setSession(newSession);
+		const {data: { subscription }} = supabase.auth.onAuthStateChange(
+			(event, session) => {
+			  if (event === 'SIGNED_OUT') {
+				setSession(null)
+			  } else if(event === "TOKEN_REFRESHED"){
+				setSession(null)
+			  } else if (session) {
+				setSession(session)
+			  }
+			})
+		  return () => {
+			subscription.unsubscribe()
 		  }
-		);
-	
-		return () => {
-		  authListener.subscription.unsubscribe();
-		};
 	  }, []);
 	
 
@@ -46,10 +43,10 @@ const AuthProvider = ({ children }: Props) => {
 		}
 	}
 
-	const logout = async (redirectTo: string) => {
+	const logout = async (redirectTo?: string) => {
 
 		try {
-			const { error } = await supabase.auth.signOut()
+			const { error } = await supabase.auth.signOut({ scope: "local" })
 
 			if(error) throw error
 
@@ -60,6 +57,21 @@ const AuthProvider = ({ children }: Props) => {
 			console.error(error)
 		}
 	}
+
+	useEffect(() => {
+		const {data: { subscription }} = supabase.auth.onAuthStateChange(
+			(event, session) => {
+			  if (event === 'SIGNED_OUT') {
+				setSession(null)
+			  } else if (session) {
+				setSession(session)
+			  }
+			})
+		  return () => {
+			subscription.unsubscribe()
+		  }
+	  }, []);
+	
 
 	const value: TAuth = {
 		login,
