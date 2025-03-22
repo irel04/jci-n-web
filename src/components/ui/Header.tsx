@@ -1,10 +1,24 @@
 // import logo from "@public/assets/logo.png"
 import githubLogo from "@src/assets/icons/github-logo.svg"
 import faqs from "@src/assets/icons/faqs.svg"
+import { useEffect, useState } from "react"
 
 function Header() {
+
+	const [isTopPosition, setIsTopPosition] = useState<boolean>(true)
+
+	useEffect(() => {
+		const handleCheckPosition = () => {
+			setIsTopPosition(window.scrollY === 0);
+		}
+
+		window.addEventListener("scroll",handleCheckPosition)
+
+		return () => window.removeEventListener("scroll", handleCheckPosition)
+	}, [])
+
 	return (
-		<header className="absolute flex py-4 px-8 items-center font-header gap-4 shadow w-full h-24 z-10 bg-white">
+		<header className={`absolute flex py-4 px-8 items-center font-header gap-4 shadow w-full h-24 z-10 bg-white transition-transform duration-200 ease-out ${isTopPosition ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
 			<div className="flex-1">
 				<button className="bg-neutral-500/50 p-4  w-36 text-center rounded-md text-white">Logo Icon</button>
 			</div>

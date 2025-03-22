@@ -1,5 +1,5 @@
 import { useMask } from "@react-input/mask";
-import { ChangeEvent, InputHTMLAttributes, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import Calendar from "react-calendar";
 import { FieldError } from "react-hook-form";
 import 'react-calendar/dist/Calendar.css';

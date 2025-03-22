@@ -19,6 +19,7 @@ export type TAuth = {
 	birthdate: string,
 	phone_number: string,
 	address: string,
+	password?: string
   }
 
   export type TCompleteProfile = TBaseProfile & {

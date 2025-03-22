@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router"
 import { EditProfile, Home } from "@src/pages"
 import Layout from "@src/layout/Layout"
 import AuthProvider from "@src/context/auth/AuthProvider"
+import { ToastContainer } from "react-toastify"
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
           <Route path="/edit-profile" element={<EditProfile />} />
         </Route>
       </Routes>
+      <ToastContainer position="top-right" />
     </AuthProvider>
   )
 }

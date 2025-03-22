@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ZProfile } from "@src/validation";
 import InputCalendar from "@src/components/ui/InputCalendar";
+import { toast } from "react-toastify";
 
 const EditProfile = () => {
 	const { session, logout } = useAuth();
@@ -33,15 +34,13 @@ const EditProfile = () => {
 	// Initialize useForm
 	const {
 		register,
-		formState: { errors },
+		formState: { errors, isDirty },
 		handleSubmit,
 		reset,
-		control,
-		watch
-	} = useForm<TBaseProfile & { password: string }>({
+		control	} = useForm<TBaseProfile & { password?: string }>({
 		resolver: zodResolver(ZProfile),
 		mode: "onChange",
-		defaultValues: {}, 
+		defaultValues: userData || {}, // Ensure default values are set initially
 	});
 
 	useEffect(() => {
@@ -74,8 +73,33 @@ const EditProfile = () => {
 	}, [userData, reset]);
 
 	const handleSubmitUpdate = async (payload: TBaseProfile) => {
-		console.log(payload);
+
+		const { password, ...otherDetails } = payload
+
+		const loading = toast.loading("Please wait...")
+
+		try {
+			const { error } = await supabase.from("users_details").update(otherDetails).eq("auth_id", session?.user.id) 
+
+			if(error) throw error
+
+			if(password !== "" && password !== null && password !== undefined){
+				
+				const {error: authError} = await supabase.auth.updateUser({
+					email: otherDetails.email_address,
+					password: password
+				})
+	
+				if(authError) throw authError
+			}
+
+			toast.update(loading, {render: "Saved Successfully", isLoading: false, autoClose: 3000, type: "success", hideProgressBar: true})
+		} catch (error) {
+			toast.update(loading, {render: "Something went wrong", isLoading: false, autoClose: 3000, type: "error", hideProgressBar: true})
+			console.error(error)
+		}
 	};
+
 
 	return (
 		<>
@@ -101,7 +125,7 @@ const EditProfile = () => {
 					</div>
 
 					<div className="flex justify-end">
-						<button className="px-4 py-2 bg-brand-300 rounded-md text-app-white max-w-40" type="submit">
+						<button className={`px-4 py-2 bg-brand-300 rounded-md text-app-white max-w-40 ${!isDirty ? "bg-neutral-200 text-neutral-400" : ""}`} type="submit" disabled={!isDirty}>
 							Save
 						</button>
 					</div>
