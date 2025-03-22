@@ -6,8 +6,9 @@ import { TBaseProfile } from "@src/types";
 import supabase from "@src/utils/supabase";
 import { PostgrestError } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { ZProfile } from "@src/validation";
+import InputCalendar from "@src/components/ui/InputCalendar";
 
 const EditProfile = () => {
 	const { session, logout } = useAuth();
@@ -35,6 +36,8 @@ const EditProfile = () => {
 		formState: { errors },
 		handleSubmit,
 		reset,
+		control,
+		watch
 	} = useForm<TBaseProfile & { password: string }>({
 		resolver: zodResolver(ZProfile),
 		mode: "onChange",
@@ -84,7 +87,9 @@ const EditProfile = () => {
 						<p className="font-semibold md:col-span-2">Personal Details</p>
 						<Input label="First Name" {...register("first_name")} error={errors["first_name"]} />
 						<Input label="Last Name" {...register("last_name")} error={errors["last_name"]} />
-						<Input label="Birthday" {...register("birthdate")} error={errors["birthdate"]} />
+						<Controller control={control} name="birthdate" render={({ field: { onChange, value }, fieldState: { error } }) => {
+							return <InputCalendar onChange={onChange} label="Birthday" defaultValue={value} error={error} />
+						}}/>
 						<Input label="Phone Number" {...register("phone_number")} error={errors["phone_number"]} />
 						<Input label="Address" {...register("address")} error={errors["address"]} />
 					</div>

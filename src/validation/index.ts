@@ -7,11 +7,11 @@ export const ZLogin = z.object({
 
 
 export const ZProfile = z.object({
-	first_name: z.string().nonempty(),
-	last_name: z.string().nonempty(),
-	birthdate: z.string().nonempty(),
-	phone_number: z.string().nonempty(),
-	address: z.string().nonempty(),
-	email_address: z.string().email().nonempty(),
-	password: z.string().nonempty()
+	first_name: z.string().nonempty("Field required"),
+	last_name: z.string().nonempty("Field required"),
+	birthdate: z.string().nonempty("Field required"),
+	phone_number: z.string().nonempty("Field required"),
+	address: z.string().nonempty("Field required"),
+	email_address: z.string().email().nonempty("Field required"),
+	password: z.string()
 })
