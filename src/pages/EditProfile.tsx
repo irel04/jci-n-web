@@ -5,7 +5,7 @@ import { useAuth } from "@src/context/auth/auth.module";
 import { TBaseProfile } from "@src/types";
 import supabase from "@src/utils/supabase";
 import { PostgrestError } from "@supabase/supabase-js";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ZProfile } from "@src/validation";
 import InputCalendar from "@src/components/ui/InputCalendar";
@@ -15,14 +15,14 @@ const EditProfile = () => {
 	const { session, logout } = useAuth();
 	const [userData, setUserData] = useState<TBaseProfile | null>(null);
 
-	const handleLogout = async () => {
+	const handleLogout = useCallback(async () => {
 		try {
 			await logout();
 		} catch (error) {
 			console.error('Unexpected error:', error);
 		}
-	};
-
+	}, [logout]); // Dependencies: logout function
+	
 	
 
 	useEffect(() => {
@@ -33,7 +33,7 @@ const EditProfile = () => {
 		});
 
 		return () => subscription.unsubscribe();
-	}, []);
+	}, [handleLogout]);
 
 	// Initialize useForm
 	const {
