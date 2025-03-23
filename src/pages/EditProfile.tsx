@@ -16,7 +16,11 @@ const EditProfile = () => {
 	const [userData, setUserData] = useState<TBaseProfile | null>(null);
 
 	const handleLogout = async () => {
-		await logout();
+		try {
+			await logout();
+		} catch (error) {
+			console.error('Unexpected error:', error);
+		}
 	};
 
 	

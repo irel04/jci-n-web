@@ -14,7 +14,7 @@ function App() {
           <Route path="/edit-profile" element={<EditProfile />} />
         </Route>
       </Routes>
-      <ToastContainer position="top-right" />
+      <ToastContainer position="top-right" hideProgressBar={true} autoClose={2500}/>
     </AuthProvider>
   )
 }

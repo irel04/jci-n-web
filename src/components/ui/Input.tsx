@@ -5,10 +5,11 @@ import { FieldError } from "react-hook-form"
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 	label: string, 
 	icon?: string,
-	error?: FieldError
+	error?: FieldError,
+	showErrorMessage?: boolean 
 }
 
-const Input = ({ error, icon, label, ...props }: InputProps) => {
+const Input = ({ error, icon, label, showErrorMessage=true, ...props }: InputProps) => {
 
 	
 	return (
@@ -18,7 +19,7 @@ const Input = ({ error, icon, label, ...props }: InputProps) => {
 				<input className="focus:outline-none w-full bg-none" {...props}/>
 				{icon && <img src={icon} alt="" />}
 			</div>
-			{error && <p className="text-xs text-red-500 md:text-base">{error.message}</p>}
+			{error && showErrorMessage && <p className="text-xs text-red-500 md:text-base">{error.message}</p>}
 			{/* <p className="text-xs text-red-500 md:text-base">Error</p> */}
 		</div>
 	)

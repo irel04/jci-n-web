@@ -30,32 +30,23 @@ const AuthProvider = ({ children }: Props) => {
 	  }, []);
 	
 
-	const login = async (payload: TLogin, redirectTo: string) => {
+	const login = async (payload: TLogin) => {
 		const { email, password } = payload
-		try {
-			const { error } = await supabase.auth.signInWithPassword({ email, password })
+		const { error } = await supabase.auth.signInWithPassword({ email, password })
 
-			if(error) throw error
+		if (error) throw error
 
-			window.location.href = redirectTo
-		} catch (error) {
-			console.error(error)
-		}
 	}
 
 	const logout = async (redirectTo?: string) => {
 
-		try {
-			const { error } = await supabase.auth.signOut({ scope: "local" })
+		const { error } = await supabase.auth.signOut({ scope: "local" })
 
-			if(error) throw error
+		if (error) throw error
 
-			if(redirectTo) window.location.href = redirectTo
+		if (redirectTo) window.location.href = redirectTo
 
-			setSession(null)
-		} catch (error) {
-			console.error(error)
-		}
+		setSession(null)
 	}
 
 	useEffect(() => {

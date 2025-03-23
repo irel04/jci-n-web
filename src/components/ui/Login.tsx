@@ -7,6 +7,7 @@ import { TLogin } from "@src/types"
 import { useEffect, useState } from "react"
 import { X } from "lucide-react"
 import { useAuth } from "@src/context/auth/auth.module"
+import { toast } from "react-toastify"
 
 
 
@@ -21,7 +22,7 @@ const Login = ({isOpen, handleClose, showCloseButton=true}: Props) => {
 
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
-	const { handleSubmit, register, formState: { errors } } = useForm<TLogin>({
+	const { handleSubmit, register, formState: { errors }, setError } = useForm<TLogin>({
 		resolver: zodResolver(ZLogin),
 		mode: "onChange"
 	})
@@ -32,9 +33,22 @@ const Login = ({isOpen, handleClose, showCloseButton=true}: Props) => {
 
 	const handleLogin = async (value: TLogin) => {
 		setIsLoading(true)
-		await login(value, window.location.pathname)
+		try {
+			await login(value)
+			toast.success("Login successfully")
+		} catch (error) {
 
-		setIsLoading(false)
+			console.error('Unexpected error:', error);
+
+			setError("email", { message: "Invalid password" })
+			setError("password", { message: "Invalid password" })
+
+			toast.error("Invalid email/password")
+
+		} finally {
+			setIsLoading(false)
+		}
+
 	}
 
 	useEffect(() => {
@@ -59,8 +73,8 @@ const Login = ({isOpen, handleClose, showCloseButton=true}: Props) => {
 				<img src={pupLogo} alt="" />
 				<p className="text-xl font-bold">Login</p>
 				<form className="flex-1 justify-center items-center flex flex-col gap-4" onSubmit={handleSubmit(handleLogin)}>
-					<Input label="Email" {...register("email")} error={errors["email"]} />
-					<Input type="password" label="Password" {...register("password")} error={errors["password"]}/>
+					<Input label="Email" {...register("email")} error={errors["email"]}  showErrorMessage={false} />
+					<Input type="password" label="Password" {...register("password")} error={errors["password"]} showErrorMessage={false}/>
 					<button className="cursor-pointer px-4 py-2 bg-brand-300 rounded-md text-app-white max-w-max mx-auto text-sm md:text-base" type="submit">{isLoading ? "Please wait..." : "Continue"}</button>
 				</form>
 			</div>
