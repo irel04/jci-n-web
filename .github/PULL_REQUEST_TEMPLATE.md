@@ -21,4 +21,4 @@ Closes #ISSUE_NUMBER
 - [ ] Unused code, variables, and console logs have been removed.
 - [ ] Code compiles and runs without errors.
 - [ ] Build and tests succeeds locally.
-- [ ] Assigned at least two reviewers (xialuna[mandatory], DavidBatoDev, or KyneLaggui).
+
