@@ -61,7 +61,7 @@ const InputCalendar = ({defaultValue, onChange, label, error }: Props) => {
 			onChange(date)
 		}
 
-	}, [date])
+	}, [date, onChange])
 
 	useEffect(() => {
 		if(defaultValue !== ""){
