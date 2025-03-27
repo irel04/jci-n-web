@@ -7,7 +7,7 @@ const Layout = () => {
 			{/* Wrapper */}
 			<div className="relative h-full max-w-[2560px] mx-auto flex flex-col">
 				<Header/>
-				<div className="p-4 flex-1 pt-28">
+				<div className="p-4 flex-1 pt-24">
 					<Outlet />
 				</div>
 				<Footer/>
