@@ -27,7 +27,7 @@ function Header() {
 
 
 	return (
-		<header className={`absolute flex py-2 px-3 md:px-10 items-center shadow w-full h-20 z-10 gap-2 bg-white `}>
+		<header className={`fixed flex py-2 px-3 md:px-10 items-center shadow w-full h-20 z-10 gap-2 bg-white `}>
 			<div className="flex-1 flex items-center gap-4 lg:gap-10">
 				<a href="/">
 					<img src={webLogo} alt="" className="w-32 2xl:w-56 aspect-auto" />
