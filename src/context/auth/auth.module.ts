@@ -1,4 +1,4 @@
-import { TAuth } from "@src/types";
+import { TAuth } from "@/types";
 import { createContext, useContext } from "react";
 
 export const AuthContext = createContext<TAuth>({

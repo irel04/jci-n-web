@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router"
-import { EditProfile, EmbeddedSystem, Home } from "@src/pages"
-import Layout from "@src/layout/Layout"
-import AuthProvider from "@src/context/auth/AuthProvider"
+import { EditProfile, EmbeddedSystem, Home } from "@/pages"
+import Layout from "@/layout/Layout"
+import AuthProvider from "@/context/auth/AuthProvider"
 import { ToastContainer } from "react-toastify"
 
 function App() {

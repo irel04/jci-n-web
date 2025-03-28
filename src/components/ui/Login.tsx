@@ -1,12 +1,12 @@
-import Input from "@src/components/ui/Input"
-import pupLogo from "@src/assets/pup-logo.png"
+import Input from "@/components/ui/Input"
+import pupLogo from "@/assets/pup-logo.png"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ZLogin } from "@src/validation"
-import { TLogin } from "@src/types"
+import { ZLogin } from "@/validation"
+import { TLogin } from "@/types"
 import { useEffect, useState } from "react"
 import { X } from "lucide-react"
-import { useAuth } from "@src/context/auth/auth.module"
+import { useAuth } from "@/context/auth/auth.module"
 import { toast } from "react-toastify"
 
 

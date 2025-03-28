@@ -1,14 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@src/components";
-import Login from "@src/components/ui/Login";
-import { useAuth } from "@src/context/auth/auth.module";
-import { TBaseProfile } from "@src/types";
-import supabase from "@src/utils/supabase";
+import { Input } from "@/components";
+import Login from "@/components/ui/Login";
+import { useAuth } from "@/context/auth/auth.module";
+import { TBaseProfile } from "@/types";
+import supabase from "@/utils/supabase";
 import { PostgrestError } from "@supabase/supabase-js";
 import { useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { ZProfile } from "@src/validation";
-import InputCalendar from "@src/components/ui/InputCalendar";
+import { ZProfile } from "@/validation";
+import InputCalendar from "@/components/ui/InputCalendar";
 import { toast } from "react-toastify";
 
 const EditProfile = () => {

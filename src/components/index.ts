@@ -1,4 +1,4 @@
-export {default as Header} from "@src/components/ui/Header"
-export {default as Footer} from "@src/components/ui/Footer"
+export {default as Header} from "@/components/ui/Header"
+export {default as Footer} from "@/components/ui/Footer"
 
-export {default as Input} from "@src/components/ui/Input"
+export {default as Input} from "@/components/ui/Input"

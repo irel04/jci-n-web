@@ -1,6 +1,6 @@
-import { AuthContext } from "@src/context/auth/auth.module";
-import { TAuth, TLogin } from "@src/types";
-import supabase from "@src/utils/supabase";
+import { AuthContext } from "@/context/auth/auth.module";
+import { TAuth, TLogin } from "@/types";
+import supabase from "@/utils/supabase";
 import { Session } from "@supabase/supabase-js";
 import { ReactNode, useEffect, useState } from "react";
 
