@@ -1,5 +1,4 @@
 // import logo from "@public/assets/logo.png"
-import { useEffect, useState } from "react"
 import webLogo from "@public/web-logo-2.png"
 import {
 	NavigationMenu,
