@@ -9,7 +9,7 @@ import {
 	NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 
-import devs from "@/data.json"
+import devs from "@/data/devs.json"
 import jb from "@/assets/devs/jb.png"
 import nico from "@/assets/devs/nico.png"
 import cris from "@/assets/devs/cris.png"

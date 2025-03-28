@@ -8,7 +8,7 @@ const Footer = () => {
 				<p>This is a mobile and web application developed for a research project titled <span className="font-bold">Enhancing Garbage Management: A Mobile-Integrated, Solar-Powered Waste Collection System</span>.</p>
 				<p>Deployed at <span className="font-bold">Vercel</span></p>
 			</div>
-			<div className="flex text-xs md:text-sm gap-4 text-neutral-500/80">
+			<div className="flex text-xs flex-col md:flex-row md:text-sm gap-1 md:gap-4 text-neutral-500/80">
 				<p>Contact Us</p>
 				<p>Terms and Condition</p>
 				<p>Privacy Policy</p>
