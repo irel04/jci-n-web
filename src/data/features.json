@@ -1,0 +1,30 @@
+[
+	{
+		"feature": "Solar-Powered",
+		"image": "./assets/screenshots/Dashboard.png" 
+	},
+	{
+		"feature": "Real-time Monitoring",
+		"image": null 
+	},
+	{
+		"feature": "Fullness Level Detection",
+		"image": null 
+	},
+	{
+		"feature": "Automatic Locking",
+		"image": null 
+	},
+	{
+		"feature": "Short Path Routing",
+		"image": null 
+	},
+	{
+		"feature": "Nearest User Notification",
+		"image": null 
+	},
+	{
+		"feature": "Statistics Weekly Reports",
+		"image": null 
+	}
+]
