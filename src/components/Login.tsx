@@ -1,24 +1,24 @@
-import Input from "@/components/ui/Input"
 import pupLogo from "@/assets/pup-logo.png"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { ZLogin } from "@/validation"
-import { TLogin } from "@/types"
-import { useEffect, useState } from "react"
-import { X } from "lucide-react"
+import Input from "@/components/Input"
 import { useAuth } from "@/context/auth/auth.module"
+import { TLogin } from "@/types"
+import { ZLogin } from "@/validation"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { X } from "lucide-react"
+import { useEffect, useState } from "react"
+import { useForm } from "react-hook-form"
 import { toast } from "react-toastify"
 
 
 
 
- type Props =  {
+type Props = {
 	isOpen: boolean,
 	handleClose?: () => void;
 	showCloseButton?: boolean,
- }
+}
 
-const Login = ({isOpen, handleClose, showCloseButton=true}: Props) => {
+const Login = ({ isOpen, handleClose, showCloseButton = true }: Props) => {
 
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -29,7 +29,7 @@ const Login = ({isOpen, handleClose, showCloseButton=true}: Props) => {
 
 	const { login } = useAuth()
 
-	
+
 
 	const handleLogin = async (value: TLogin) => {
 		setIsLoading(true)
@@ -52,7 +52,7 @@ const Login = ({isOpen, handleClose, showCloseButton=true}: Props) => {
 	}
 
 	useEffect(() => {
-		if(isOpen){
+		if (isOpen) {
 			document.body.classList.add("overflow-hidden")
 		} else {
 			document.body.classList.remove("overflow-hidden")
@@ -65,16 +65,16 @@ const Login = ({isOpen, handleClose, showCloseButton=true}: Props) => {
 	}, [isOpen])
 
 	return (
-		<div className={`${isOpen? "fixed" : "hidden" }  inset-0 z-20 bg-black/80 p-4 md:p-8 overflow-auto`}>
+		<div className={`${isOpen ? "fixed" : "hidden"}  inset-0 z-20 bg-black/80 p-4 md:p-8 overflow-auto`}>
 			<div className="relative w-full max-w-[320px] md:max-w-[500px] shadow-lg flex flex-col items-center text-brand-700 gap-5 rounded-md p-8 mx-auto bg-app-white space-y-2 h-full">
-				<button className={`top-5 right-5 ${showCloseButton && handleClose ? "absolute": "hidden"}`} onClick={handleClose}>
+				<button className={`top-5 right-5 ${showCloseButton && handleClose ? "absolute" : "hidden"}`} onClick={handleClose}>
 					<X />
 				</button>
 				<img src={pupLogo} alt="" />
 				<p className="text-xl font-bold">Login</p>
 				<form className="flex-1 justify-center items-center flex flex-col gap-4" onSubmit={handleSubmit(handleLogin)}>
-					<Input label="Email" {...register("email")} error={errors["email"]}  showErrorMessage={false} />
-					<Input type="password" label="Password" {...register("password")} error={errors["password"]} showErrorMessage={false}/>
+					<Input label="Email" {...register("email")} error={errors["email"]} showErrorMessage={false} />
+					<Input type="password" label="Password" {...register("password")} error={errors["password"]} showErrorMessage={false} />
 					<button className="cursor-pointer px-4 py-2 bg-brand-300 rounded-md text-app-white max-w-max mx-auto text-sm md:text-base" type="submit">{isLoading ? "Please wait..." : "Continue"}</button>
 				</form>
 			</div>
