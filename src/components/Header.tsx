@@ -15,7 +15,6 @@ import jb from "@/assets/devs/jb.png"
 import nico from "@/assets/devs/nico.png"
 import cris from "@/assets/devs/cris.png"
 import irel from "@/assets/devs/irel.png"
-import { useNavigate } from "react-router"
 import { CircleHelp, Search } from "lucide-react"
 
 
@@ -24,27 +23,15 @@ import { CircleHelp, Search } from "lucide-react"
 
 function Header() {
 
-	const [isTopPosition, setIsTopPosition] = useState<boolean>(true)
 	const profile = [jb, nico, irel, cris]
 
-	const navigate = useNavigate()
-
-	useEffect(() => {
-		const handleCheckPosition = () => {
-			setIsTopPosition(window.scrollY === 0);
-		}
-
-		window.addEventListener("scroll", handleCheckPosition)
-
-		return () => window.removeEventListener("scroll", handleCheckPosition)
-	}, [])
 
 	return (
-		<header className={`absolute flex py-2 px-3 md:px-10 items-center shadow w-full h-20 z-10 gap-2 bg-white transition-transform duration-200 ease-out ${isTopPosition ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
-			<div className="flex-1 flex items-center gap-4">
-				<button onClick={() => navigate("/")}>
+		<header className={`absolute flex py-2 px-3 md:px-10 items-center shadow w-full h-20 z-10 gap-2 bg-white `}>
+			<div className="flex-1 flex items-center gap-4 lg:gap-10">
+				<a href="/">
 					<img src={webLogo} alt="" className="w-32 2xl:w-56 aspect-auto" />
-				</button>
+				</a>
 				<NavigationMenu className="hidden md:block text-neutral-700 font-medium">
 					<NavigationMenuList>
 						<NavigationMenuLink >Home</NavigationMenuLink>
