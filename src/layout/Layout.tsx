@@ -1,5 +1,7 @@
-import { Footer, Header } from "@src/components"
+import Footer from "@/components/Footer"
+import Header from "@/components/Header"
 import { Outlet } from "react-router"
+
 
 const Layout = () => {
 	return (
@@ -7,7 +9,7 @@ const Layout = () => {
 			{/* Wrapper */}
 			<div className="relative h-full max-w-[2560px] mx-auto flex flex-col">
 				<Header/>
-				<div className="p-4 flex-1 pt-24">
+				<div className="p-10 flex-1 pt-34">
 					<Outlet />
 				</div>
 				<Footer/>

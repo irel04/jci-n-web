@@ -1,4 +1,4 @@
-import supabase from "@src/utils/supabase"
+import supabase from "@/utils/supabase"
 import { useEffect, useState } from "react"
 
 type TResult = {

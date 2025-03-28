@@ -1,14 +1,14 @@
+import Input from "@/components/Input";
+import InputCalendar from "@/components/InputCalendar";
+import Login from "@/components/Login";
+import { useAuth } from "@/context/auth/auth.module";
+import { TBaseProfile } from "@/types";
+import supabase from "@/utils/supabase";
+import { ZProfile } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@src/components";
-import Login from "@src/components/ui/Login";
-import { useAuth } from "@src/context/auth/auth.module";
-import { TBaseProfile } from "@src/types";
-import supabase from "@src/utils/supabase";
 import { PostgrestError } from "@supabase/supabase-js";
 import { useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { ZProfile } from "@src/validation";
-import InputCalendar from "@src/components/ui/InputCalendar";
 import { toast } from "react-toastify";
 
 const EditProfile = () => {
@@ -22,8 +22,8 @@ const EditProfile = () => {
 			console.error('Unexpected error:', error);
 		}
 	}, [logout]); // Dependencies: logout function
-	
-	
+
+
 
 	useEffect(() => {
 		const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
@@ -41,11 +41,11 @@ const EditProfile = () => {
 		formState: { errors, isDirty },
 		handleSubmit,
 		reset,
-		control	} = useForm<TBaseProfile & { password?: string }>({
-		resolver: zodResolver(ZProfile),
-		mode: "onChange",
-		defaultValues: userData || {}, // Ensure default values are set initially
-	});
+		control } = useForm<TBaseProfile & { password?: string }>({
+			resolver: zodResolver(ZProfile),
+			mode: "onChange",
+			defaultValues: userData || {}, // Ensure default values are set initially
+		});
 
 	useEffect(() => {
 
@@ -66,13 +66,13 @@ const EditProfile = () => {
 				console.error("Supabase error: ", (error as PostgrestError).message);
 			}
 		};
-		
+
 		fetchUser();
 	}, [session]);
 
 	useEffect(() => {
 		if (userData) {
-			reset(userData); 
+			reset(userData);
 		}
 	}, [userData, reset]);
 
@@ -83,23 +83,23 @@ const EditProfile = () => {
 		const loading = toast.loading("Please wait...")
 
 		try {
-			const { error } = await supabase.from("users_details").update(otherDetails).eq("auth_id", session?.user.id) 
+			const { error } = await supabase.from("users_details").update(otherDetails).eq("auth_id", session?.user.id)
 
-			if(error) throw error
+			if (error) throw error
 
-			if(password !== "" && password !== null && password !== undefined){
-				
-				const {error: authError} = await supabase.auth.updateUser({
+			if (password !== "" && password !== null && password !== undefined) {
+
+				const { error: authError } = await supabase.auth.updateUser({
 					email: otherDetails.email_address,
 					password: password
 				})
-	
-				if(authError) throw authError
+
+				if (authError) throw authError
 			}
 
-			toast.update(loading, {render: "Saved Successfully", isLoading: false, autoClose: 3000, type: "success", hideProgressBar: true})
+			toast.update(loading, { render: "Saved Successfully", isLoading: false, autoClose: 3000, type: "success", hideProgressBar: true })
 		} catch (error) {
-			toast.update(loading, {render: "Something went wrong", isLoading: false, autoClose: 3000, type: "error", hideProgressBar: true})
+			toast.update(loading, { render: "Something went wrong", isLoading: false, autoClose: 3000, type: "error", hideProgressBar: true })
 			console.error(error)
 		}
 	};
@@ -117,7 +117,7 @@ const EditProfile = () => {
 						<Input label="Last Name" {...register("last_name")} error={errors["last_name"]} />
 						<Controller control={control} name="birthdate" render={({ field: { onChange, value }, fieldState: { error } }) => {
 							return <InputCalendar onChange={onChange} label="Birthday" defaultValue={value} error={error} />
-						}}/>
+						}} />
 						<Input label="Phone Number" {...register("phone_number")} error={errors["phone_number"]} />
 						<Input label="Address" {...register("address")} error={errors["address"]} />
 					</div>
@@ -125,7 +125,7 @@ const EditProfile = () => {
 					<div className="grid grid-cols-1 gap-1 md:grid-cols-2">
 						<p className="font-semibold md:col-span-2">Security</p>
 						<Input label="Email" {...register("email_address")} error={errors["email_address"]} />
-						<Input label="Password" type="password" {...register("password")} error={errors["password"]} autoComplete="new-password" placeholder="***********"/>
+						<Input label="Password" type="password" {...register("password")} error={errors["password"]} autoComplete="new-password" placeholder="***********" />
 					</div>
 
 					<div className="flex justify-end">

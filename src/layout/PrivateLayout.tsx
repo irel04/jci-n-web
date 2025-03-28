@@ -1,4 +1,4 @@
-import { useAuth } from "@src/context/auth/auth.module"
+import { useAuth } from "@/context/auth/auth.module"
 import { Navigate, Outlet } from "react-router"
 
 const PrivateLayout = () => {
