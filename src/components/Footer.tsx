@@ -8,12 +8,12 @@ const Footer = () => {
 				<p>This is a mobile and web application developed for a research project titled <span className="font-bold">Enhancing Garbage Management: A Mobile-Integrated, Solar-Powered Waste Collection System</span>.</p>
 				<p>Deployed at <span className="font-bold">Vercel</span></p>
 			</div>
-			<div className="flex text-xs flex-col md:flex-row md:text-sm gap-1 md:gap-4 text-neutral-500/80">
-				<p>Contact Us</p>
-				<p>Terms and Condition</p>
-				<p>Privacy Policy</p>
-				<p>Frequently Asked Questions</p>
-			</div>
+			<ul className="flex text-xs flex-col md:flex-row md:text-sm gap-1 md:gap-4 text-neutral-500/80">
+				<li><a href="/contact-us">Contact Us</a></li>
+				<li><a href="/terms-and-conditions">Terms and Conditions</a></li>
+				<li><a href="/privacy-policy">Privacy Policy</a></li>
+				<li><a href="/faq">Frequently Asked Questions</a></li>
+			</ul>
 		</footer>
 	)
 }
