@@ -1,4 +1,6 @@
 import { useAuth } from "@/auth/auth.module"
+import { AppSidebar } from "@/components/AppSidebar"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { Navigate, Outlet } from "react-router"
 
 const AdminLayout = () => {
@@ -9,8 +11,17 @@ const AdminLayout = () => {
 	
 	if(session===undefined) return 
 
+	if(session === null &&  !is_admin) return <Navigate to="/"/>
 
-	return session && is_admin ? <Outlet/> : <Navigate to="/"/>
+	return (
+		<SidebarProvider>
+			<AppSidebar />
+			<main>
+				{/* <div><SidebarTrigger  /> / Hello</div> */}
+				<Outlet/>
+			</main>
+		</SidebarProvider>
+	)
 }
 
 export default AdminLayout
