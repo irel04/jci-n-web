@@ -28,6 +28,26 @@ const AuthProvider = ({ children }: Props) => {
 			subscription.unsubscribe()
 		  }
 	  }, []);
+
+	// Checking if the user is admin
+	useEffect(() => {
+
+		const fetchUser = async () => {
+			try {
+				const { data, error } = await supabase.from("users_details").select("is_admin").eq("auth_id", session?.user.id).single()
+
+				if(error) throw error
+
+				localStorage.setItem("is_admin", data.is_admin)
+			} catch (error) {
+				console.error(error)
+
+			}
+		}  
+		
+		fetchUser()
+
+	}, [session])
 	
 
 	const login = async (payload: TLogin) => {
@@ -46,6 +66,7 @@ const AuthProvider = ({ children }: Props) => {
 
 		if (redirectTo) window.location.href = redirectTo
 
+		localStorage.removeItem("is_admin")
 		setSession(null)
 	}
 
@@ -67,7 +88,8 @@ const AuthProvider = ({ children }: Props) => {
 	const value: TAuth = {
 		login,
 		logout,
-		session
+		session,
+		setSession
 	}
 
 	return <AuthContext.Provider value={value}>

@@ -1,6 +1,6 @@
 import Input from "@/components/Input";
 import InputCalendar from "@/components/InputCalendar";
-import Login from "@/components/Login";
+// import Login from "@/components/Login";
 import { useAuth } from "@/context/auth/auth.module";
 import { TBaseProfile } from "@/types";
 import supabase from "@/utils/supabase";
@@ -9,11 +9,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { PostgrestError } from "@supabase/supabase-js";
 import { useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { Navigate, useSearchParams } from "react-router";
 import { toast } from "react-toastify";
 
 const EditProfile = () => {
-	const { session, logout } = useAuth();
+	const { session, logout, setSession } = useAuth();
 	const [userData, setUserData] = useState<TBaseProfile | null>(null);
+
+	const [searchParams] = useSearchParams()
+	const token = searchParams.get("token")
 
 	const handleLogout = useCallback(async () => {
 		try {
@@ -23,17 +27,34 @@ const EditProfile = () => {
 		}
 	}, [logout]); // Dependencies: logout function
 
-
-
 	useEffect(() => {
-		const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
-			if (event === "TOKEN_REFRESHED") {
-				setTimeout(handleLogout, 0);
+		const authenticateUser = async () => {
+			if (!token) {
+				console.error("No token found in URL");
+				return;
 			}
-		});
 
-		return () => subscription.unsubscribe();
-	}, [handleLogout]);
+			// Restore Supabase session
+			const { data, error } = await supabase.auth.setSession({
+				access_token: token,
+				refresh_token: token, // Not required, but useful for long-term login
+			});
+
+			if (error) {
+				console.error("Session restore failed:", error.message);
+			} else {
+				// console.log("User logged in successfully:", data);
+
+				setSession(data.session)
+				
+			}
+		};
+
+		authenticateUser();
+	}, [token]);
+
+
+	
 
 	// Initialize useForm
 	const {
@@ -104,38 +125,37 @@ const EditProfile = () => {
 		}
 	};
 
+	if(!token) return <Navigate to="/"/>
 
 	return (
-		<>
-			<Login isOpen={!session} showCloseButton={false} />
-			<div className="max-w-[500px]">
-				<h1 className="text-xl font-bold md:text-2xl text-brand-700">Edit Profile</h1>
-				<form className="mt-4 flex flex-col gap-6 md:gap-8" onSubmit={handleSubmit(handleSubmitUpdate)} autoComplete="off">
-					<div className="grid grid-cols-1 gap-4 md:grid-cols-2 ">
-						<p className="font-semibold md:col-span-2">Personal Details</p>
-						<Input label="First Name" {...register("first_name")} error={errors["first_name"]} />
-						<Input label="Last Name" {...register("last_name")} error={errors["last_name"]} />
-						<Controller control={control} name="birthdate" render={({ field: { onChange, value }, fieldState: { error } }) => {
-							return <InputCalendar onChange={onChange} label="Birthday" defaultValue={value} error={error} />
-						}} />
-						<Input label="Phone Number" {...register("phone_number")} error={errors["phone_number"]} />
-						<Input label="Address" {...register("address")} error={errors["address"]} />
-					</div>
+		<div className="max-w-[500px]">
+			<h1 className="text-xl font-bold md:text-2xl text-brand-700">Edit Profile</h1>
+			<form className="mt-4 flex flex-col gap-6 md:gap-8" onSubmit={handleSubmit(handleSubmitUpdate)} autoComplete="off">
+				<div className="grid grid-cols-1 gap-4 md:grid-cols-2 ">
+					<p className="font-semibold md:col-span-2">Personal Details</p>
+					<Input label="First Name" {...register("first_name")} error={errors["first_name"]} />
+					<Input label="Last Name" {...register("last_name")} error={errors["last_name"]} />
+					<Controller control={control} name="birthdate" render={({ field: { onChange, value }, fieldState: { error } }) => {
+						return <InputCalendar onChange={onChange} label="Birthday" defaultValue={value} error={error} />
+					}} />
+					<Input label="Phone Number" {...register("phone_number")} error={errors["phone_number"]} />
+					<Input label="Address" {...register("address")} error={errors["address"]} />
+				</div>
 
-					<div className="grid grid-cols-1 gap-1 md:grid-cols-2">
-						<p className="font-semibold md:col-span-2">Security</p>
-						<Input label="Email" {...register("email_address")} error={errors["email_address"]} />
-						<Input label="Password" type="password" {...register("password")} error={errors["password"]} autoComplete="new-password" placeholder="***********" />
-					</div>
+				<div className="grid grid-cols-1 gap-1 md:grid-cols-2">
+					<p className="font-semibold md:col-span-2">Security</p>
+					<Input label="Email" {...register("email_address")} error={errors["email_address"]} />
+					<Input label="Password" type="password" {...register("password")} error={errors["password"]} autoComplete="new-password" placeholder="***********" />
+				</div>
 
-					<div className="flex justify-end">
-						<button className={`px-4 py-2 bg-brand-300 rounded-md text-app-white max-w-40 ${!isDirty ? "bg-neutral-200 text-neutral-400" : ""}`} type="submit" disabled={!isDirty}>
-							Save
-						</button>
-					</div>
-				</form>
-			</div>
-		</>
+				<div className="flex justify-end">
+					<button className={`px-4 py-2 bg-brand-300 rounded-md text-app-white max-w-40 ${!isDirty ? "bg-neutral-200 text-neutral-400" : ""}`} type="submit" disabled={!isDirty}>
+						Save
+					</button>
+				</div>
+			</form>
+			<button onClick={handleLogout}>Logout</button>
+		</div>
 	);
 };
 
