@@ -17,7 +17,7 @@ const AdminLayout = () => {
 		<SidebarProvider>
 			<AppSidebar />
 			<main>
-				{/* <div><SidebarTrigger  /> / Hello</div> */}
+				<SidebarTrigger  className="lg:hidden" />
 				<Outlet/>
 			</main>
 		</SidebarProvider>
