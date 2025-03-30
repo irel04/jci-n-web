@@ -7,25 +7,25 @@ import supabase from "@/utils/supabase";
 import { ZProfile } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PostgrestError } from "@supabase/supabase-js";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Navigate, useSearchParams } from "react-router";
 import { toast } from "react-toastify";
 
 const EditProfile = () => {
-	const { session, logout, setSession } = useAuth();
+	const { session, setSession } = useAuth();
 	const [userData, setUserData] = useState<TBaseProfile | null>(null);
 
 	const [searchParams] = useSearchParams()
 	const token = searchParams.get("token")
 
-	const handleLogout = useCallback(async () => {
-		try {
-			await logout();
-		} catch (error) {
-			console.error('Unexpected error:', error);
-		}
-	}, [logout]); // Dependencies: logout function
+	// const handleLogout = useCallback(async () => {
+	// 	try {
+	// 		await logout();
+	// 	} catch (error) {
+	// 		console.error('Unexpected error:', error);
+	// 	}
+	// }, [logout]); // Dependencies: logout function
 
 	useEffect(() => {
 		const authenticateUser = async () => {
@@ -51,7 +51,7 @@ const EditProfile = () => {
 		};
 
 		authenticateUser();
-	}, [token]);
+	}, [token, setSession]);
 
 	// Initialize useForm
 	const {
@@ -151,7 +151,6 @@ const EditProfile = () => {
 					</button>
 				</div>
 			</form>
-			<button onClick={handleLogout}>Logout</button>
 		</div>
 	);
 };

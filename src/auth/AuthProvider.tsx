@@ -1,7 +1,6 @@
 import { AuthContext } from "@/auth/auth.module";
-import { TAuth, TLogin } from "@/types";
+import { TAuth, TExtendedSession, TLogin } from "@/types";
 import supabase from "@/utils/supabase";
-import { Session } from "@supabase/supabase-js";
 import { ReactNode, useEffect, useState } from "react";
 
 
@@ -13,7 +12,7 @@ type Props = {
 
 const AuthProvider = ({ children }: Props) => {
 
-	const [session, setSession] = useState<Session | null>(null)
+	const [session, setSession] = useState<TExtendedSession | null>(null)
 
 	useEffect(() => {
 		const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -38,6 +37,9 @@ const AuthProvider = ({ children }: Props) => {
 
 				if (error) throw error
 
+				setSession((prev) => (prev ? { ...prev, is_admin: data.is_admin } : prev));
+				
+
 			} catch (error) {
 				console.error(error)
 
@@ -46,7 +48,7 @@ const AuthProvider = ({ children }: Props) => {
 
 		fetchUser()
 
-	}, [session])
+	}, [session?.user.id])
 
 
 	const login = async (payload: TLogin) => {
