@@ -1,12 +1,27 @@
+import { useAuth } from "@/auth/auth.module"
 import Login from "@/components/Login"
 import { Button } from "@/components/ui/button"
 import webLogo from "@public/web-logo-2.png"
 import { Lock } from "lucide-react"
 import { useState } from "react"
+import { useNavigate } from "react-router"
+import { ArrowRight } from "lucide-react"
+
 
 const Footer = () => {
 
 	const [isOpen, setIsOpen] = useState<boolean>(false)
+
+	const { session } = useAuth()
+	const navigate = useNavigate()
+
+	const handleClickButton = async () => {
+		if(session){
+			navigate("/admin")
+		} else {
+			setIsOpen(true)
+		}
+	}
 
 	
 	return (
@@ -25,9 +40,10 @@ const Footer = () => {
 					<li><a href="/faq">Frequently Asked Questions</a></li>
 				</ul>
 				<div className="md:col-start-2 flex justify-end">
-					<Button variant="secondary" className="text-xs" onClick={() => setIsOpen(true)}>
-						<Lock />
-						<p>Login as Admin</p>
+					<Button variant={session ? "link" : "secondary"} className="text-xs" onClick={handleClickButton}>
+						{!session && <Lock />}
+						<p>{session ? "Go to admin" : "Login as Admin"}</p>
+						{session && <ArrowRight/>}
 					</Button>
 				</div>
 			</footer>
