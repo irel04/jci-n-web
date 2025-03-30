@@ -1,7 +1,7 @@
 import Input from "@/components/Input";
 import InputCalendar from "@/components/InputCalendar";
 // import Login from "@/components/Login";
-import { useAuth } from "@/context/auth/auth.module";
+import { useAuth } from "@/auth/auth.module";
 import { TBaseProfile } from "@/types";
 import supabase from "@/utils/supabase";
 import { ZProfile } from "@/validation";
@@ -46,15 +46,12 @@ const EditProfile = () => {
 				// console.log("User logged in successfully:", data);
 
 				setSession(data.session)
-				
+
 			}
 		};
 
 		authenticateUser();
 	}, [token]);
-
-
-	
 
 	// Initialize useForm
 	const {
@@ -125,7 +122,7 @@ const EditProfile = () => {
 		}
 	};
 
-	if(!token) return <Navigate to="/"/>
+	if (!token) return <Navigate to="/" />
 
 	return (
 		<div className="max-w-[500px]">

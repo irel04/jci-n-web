@@ -1,6 +1,6 @@
 import pupLogo from "@/assets/pup-logo.png"
+import { useAuth } from "@/auth/auth.module"
 import Input from "@/components/Input"
-import { useAuth } from "@/context/auth/auth.module"
 import { TLogin } from "@/types"
 import { ZLogin } from "@/validation"
 import { zodResolver } from "@hookform/resolvers/zod"
