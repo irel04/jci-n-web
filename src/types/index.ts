@@ -8,8 +8,8 @@ export type TLogin = {
 export type TAuth = {
 	login: (payload: TLogin) => Promise<void>;  // Always required
 	logout: (redirectTo?: string) => Promise<void>;          // Always required
-	session?: TExtendedSession | null;
-	setSession: React.Dispatch<React.SetStateAction<TExtendedSession | null>>
+	session?: Session| null;
+	setSession: React.Dispatch<React.SetStateAction<Session | null | undefined>>
 };
 
 

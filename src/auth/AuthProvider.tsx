@@ -1,6 +1,7 @@
 import { AuthContext } from "@/auth/auth.module";
-import { TAuth, TExtendedSession, TLogin } from "@/types";
+import { TAuth, TLogin } from "@/types";
 import supabase from "@/utils/supabase";
+import { Session } from "@supabase/supabase-js";
 import { ReactNode, useEffect, useState } from "react";
 
 
@@ -12,21 +13,23 @@ type Props = {
 
 const AuthProvider = ({ children }: Props) => {
 
-	const [session, setSession] = useState<TExtendedSession | null>(null)
+	const [session, setSession] = useState<Session | null | undefined>(undefined)
 
 	useEffect(() => {
-		const { data: { subscription } } = supabase.auth.onAuthStateChange(
-			(event, session) => {
-				if (event === 'SIGNED_OUT') {
-					setSession(null)
-				} else if (session) {
-					setSession(session)
-				}
-			})
-		return () => {
-			subscription.unsubscribe()
-		}
+		supabase.auth.getSession().then(({ data: { session } }) => {
+			setSession(session)
+		})
+
+		const {
+			data: { subscription },
+		} = supabase.auth.onAuthStateChange((_event, session) => {
+			setSession(session)
+		})
+
+		return () => subscription.unsubscribe()
 	}, [])
+
+
 
 	// Checking if the user is admin
 	useEffect(() => {
@@ -37,7 +40,8 @@ const AuthProvider = ({ children }: Props) => {
 
 				if (error) throw error
 
-				setSession((prev) => (prev ? { ...prev, is_admin: data.is_admin } : prev));
+				localStorage.setItem("is_admin", data.is_admin)
+				
 				
 
 			} catch (error) {
@@ -69,20 +73,7 @@ const AuthProvider = ({ children }: Props) => {
 
 	}
 
-	useEffect(() => {
-		const { data: { subscription } } = supabase.auth.onAuthStateChange(
-			(event, session) => {
-				if (event === 'SIGNED_OUT') {
-					setSession(null)
-				} else if (session) {
-					setSession(session)
-				}
-			})
-		return () => {
-			subscription.unsubscribe()
-		}
-	}, []);
-
+	
 
 	const value: TAuth = {
 		login,

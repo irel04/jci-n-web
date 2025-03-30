@@ -17,19 +17,21 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/edit-profile" element={<EditProfile />} />
 
-            <Route path="/embedded-system" element={<EmbeddedSystem />} />
           </Route>
 
           {/* Admin */}
-          <Route element={<AdminLayout />}>
-            <Route path="/admin" element={<AdminHome />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminHome />} />
           </Route>
 
           {/* Special Page */}
           {/* Redirect to NotFound for unknown routes */}
           <Route path="*" element={<Navigate to="/404" replace />} />
+
           {/* Not found page */}
           <Route path="/404" element={<NotFound />} />
+
+          <Route path="/embedded-system" element={<EmbeddedSystem />} />
         </Route>
       </Routes>
       <ToastContainer position="top-right" hideProgressBar={true} autoClose={2500} />

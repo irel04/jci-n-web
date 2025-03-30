@@ -28,14 +28,15 @@ const Login = ({ isOpen, handleClose, showCloseButton = true }: Props) => {
 	})
 
 	const { login } = useAuth()
-
+	
 
 
 	const handleLogin = async (value: TLogin) => {
 		setIsLoading(true)
 		try {
 			await login(value)
-			toast.success("Login successfully")
+			toast.success("Login successfully", {onClose: () => window.location.href = "/admin"})
+
 		} catch (error) {
 
 			console.error('Unexpected error:', error);
@@ -65,13 +66,13 @@ const Login = ({ isOpen, handleClose, showCloseButton = true }: Props) => {
 	}, [isOpen])
 
 	return (
-		<div className={`${isOpen ? "fixed" : "hidden"}  inset-0 z-20 bg-black/80 p-4 md:p-8 overflow-auto`}>
-			<div className="relative w-full max-w-[320px] md:max-w-[500px] shadow-lg flex flex-col items-center text-brand-700 gap-5 rounded-md p-8 mx-auto bg-app-white space-y-2 h-full">
+		<div className={`${isOpen ? "fixed" : "hidden"}  inset-0 z-20 bg-black/80 p-4 md:p-8 overflow-auto flex items-center justify-center`}>
+			<div className="relative w-full max-w-[320px] md:max-w-[500px] shadow-lg flex flex-col items-center text-brand-700 gap-5 rounded-md p-8 mx-auto bg-app-white space-y-2">
 				<button className={`top-5 right-5 ${showCloseButton && handleClose ? "absolute" : "hidden"}`} onClick={handleClose}>
 					<X />
 				</button>
 				<img src={pupLogo} alt="" />
-				<p className="text-xl font-bold">Login</p>
+				<p className="text-xl font-bold">Login as Admin</p>
 				<form className="flex-1 justify-center items-center flex flex-col gap-4" onSubmit={handleSubmit(handleLogin)}>
 					<Input label="Email" {...register("email")} error={errors["email"]} showErrorMessage={false} />
 					<Input type="password" label="Password" {...register("password")} error={errors["password"]} showErrorMessage={false} />

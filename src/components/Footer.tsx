@@ -7,7 +7,7 @@ import { useState } from "react"
 const Footer = () => {
 
 	const [isOpen, setIsOpen] = useState<boolean>(false)
-	
+
 	
 	return (
 		<>
@@ -27,7 +27,7 @@ const Footer = () => {
 				<div className="md:col-start-2 flex justify-end">
 					<Button variant="secondary" className="text-xs" onClick={() => setIsOpen(true)}>
 						<Lock />
-						<p>Go to Admin</p>
+						<p>Login as Admin</p>
 					</Button>
 				</div>
 			</footer>
