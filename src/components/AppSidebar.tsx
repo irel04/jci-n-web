@@ -1,4 +1,4 @@
-import { CircleHelp,  Contact,  LogOut, Phone, UserCog } from "lucide-react"
+import { CircleHelp, LogOut, Phone, UserCog } from "lucide-react"
 import webIcon from "@public/web-icon.png"
 
 import {
@@ -12,7 +12,6 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 	SidebarSeparator,
-	useSidebar,
 } from "@/components/ui/sidebar"
 import { useAuth } from "@/auth/auth.module"
 import { useLocation } from "react-router"
@@ -49,7 +48,6 @@ export function AppSidebar() {
 		}
 	} 
 
-	const { isMobile } = useSidebar()
 
 	const { pathname } = useLocation()
 	return (
