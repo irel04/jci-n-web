@@ -1,4 +1,13 @@
+// Client
+export { default as Home } from "@/pages/client/Home";
+export {default as EditProfile} from "@/pages/client/EditProfile";
 
-export { default as Home } from "@/pages/Home";
-export {default as EditProfile} from "@/pages/EditProfile";
-export {default as EmbeddedSystem} from "@/pages/EmbeddedSystem"
+
+// Admin
+export {default as AdminHome} from "@/pages/admin/AdminHome"
+
+
+
+// Special pages
+export {default as NotFound} from "@/pages/NotFound"
+export {default as EmbeddedSystem} from "@/pages/client/EmbeddedSystem"
