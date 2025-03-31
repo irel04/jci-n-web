@@ -18,7 +18,7 @@ const AdminLayout = () => {
 	return (
 		<SidebarProvider>
 			<AppSidebar />
-			<main className="border-red-500 border-2 p-4 flex-1">
+			<main className=" p-4 w-full overflow-x-hidden flex flex-col">
 				<div className="flex items-center gap-2 lg:hidden">
 					<SidebarTrigger />
 					<h1 className="text-neutral-500 text-lg"> Admin / On-Boarding </h1> 

@@ -36,4 +36,6 @@ export type TCompleteProfile = TBaseProfile & {
 	created_at: string,
 	auth_id: string,
 	RFID?: string,
+	status?: string
 }
+
