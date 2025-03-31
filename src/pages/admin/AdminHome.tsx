@@ -1,7 +1,11 @@
 
 const AdminHome = () => {
   return (
-	<div>Hello</div>
+    <>
+      {/* Header */}
+      <h1 className="hidden lg:block text-neutral-500 text-xl"> Admin / On-Boarding </h1>
+      
+    </>
   )
 }
 

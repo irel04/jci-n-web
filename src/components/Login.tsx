@@ -72,7 +72,7 @@ const Login = ({ isOpen, handleClose, showCloseButton = true }: Props) => {
 					<X />
 				</button>
 				<img src={pupLogo} alt="" />
-				<p className="text-xl font-bold">Login as Admin</p>
+				<h5 className="text-xl font-bold">Login as Admin</h5>
 				<form className="flex-1 justify-center items-center flex flex-col gap-4" onSubmit={handleSubmit(handleLogin)}>
 					<Input label="Email" {...register("email")} error={errors["email"]} showErrorMessage={false} />
 					<Input type="password" label="Password" {...register("password")} error={errors["password"]} showErrorMessage={false} />

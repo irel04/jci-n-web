@@ -4,14 +4,24 @@
 @font-face {
   font-family: Montserrat;
   font-style: normal;
-  font-weight: 200 700;
+  /* font-weight: 200 700; */
   font-display: swap;
-  src: url("assets/fonts/Montserrat-Regular.ttf") format("ttf");
+  src: url("assets/fonts/Montserrat-Regular.ttf") format("truetype");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
 }
 
 @theme {
   /* Font */
-  --font-header: "Montserrat", "sans-serif";
+  --font-sans: "Montserrat", "sans-serif";
+
 
   /* Colors */
   --color-brand-100: #C2D7FA;
@@ -181,6 +191,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -195,7 +206,7 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
- 
+
   .dark {
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
