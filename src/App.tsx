@@ -2,7 +2,7 @@ import AuthProvider from "@/auth/AuthProvider"
 import AdminLayout from "@/layout/AdminLayout"
 import ClientLayout from "@/layout/ClientLayout"
 import Layout from "@/layout/Layout"
-import { AdminHome, EditProfile, EmbeddedSystem, Home, NotFound } from "@/pages"
+import { AdminHome, CurrentUsers, EditProfile, EmbeddedSystem, Home, NotFound } from "@/pages"
 import { Navigate, Route, Routes } from "react-router"
 import { ToastContainer } from "react-toastify"
 
@@ -22,6 +22,7 @@ function App() {
           {/* Admin */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminHome />} />
+            <Route path="current-users" element={< CurrentUsers/>} />
           </Route>
 
           {/* Special Page */}

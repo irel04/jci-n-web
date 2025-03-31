@@ -1,5 +1,5 @@
 import webIcon from "@public/web-icon.png"
-import { CircleHelp, LogOut, Phone, UserCog } from "lucide-react"
+import { CircleHelp, LogOut, Phone, UserCog, UserRoundCheck } from "lucide-react"
 
 import { useAuth } from "@/auth/auth.module"
 import {
@@ -22,6 +22,11 @@ const items = [
 		title: "On-boarding",
 		url: "/admin",
 		icon: UserCog,
+	},
+	{
+		title: "Current Users",
+		url: "/admin/current-users",
+		icon: UserRoundCheck,
 	},
 	{
 		title: "Contact Us",
