@@ -14,7 +14,8 @@ const tableHeader = [
   "Address",
   "Phone Number",
   "RFID",
-  "Status"
+  "Status",
+  "Created at"
 ]
 
 const AdminHome = () => {
@@ -24,21 +25,40 @@ const AdminHome = () => {
 
   const [userId, setUserId] = useState<string  | null>()
 
+  const fetchUsers = async () => {
+    try {
+
+      const { data, error } = await supabase.from("users_details").select("*").eq("status", "onboarding").order("created_at", { ascending: false })
+
+      if (error) throw error
+
+      setUsers(data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
+    fetchUsers()
+  }, [])
 
-        const { data, error } = await supabase.from("users_details").select("*").eq("status", "onboarding")
+  useEffect(() => {
 
-        if (error) throw error
+    
+    const channels = supabase.channel('admin-listening')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'users_details' },
+        () => {
+          fetchUsers()
+        }
+      )
+      .subscribe()
 
-        setUsers(data)
-      } catch (error) {
-        console.error(error)
-      }
+    return () => {
+      channels.unsubscribe()
     }
 
-    fetchUsers()
   }, [])
 
   const handleOpenUserDetail = (id: string) => {
@@ -81,6 +101,7 @@ const AdminHome = () => {
                   <TableCell>{user.phone_number}</TableCell>
                   <TableCell>{user.RFID ?? "No RFID"}</TableCell>
                   <TableCell className="font-semibold">{user.status}</TableCell>
+                  <TableCell>{user.created_at}</TableCell>
                 </TableRow>
               )
             }) : <AdminTableSkeleton />}

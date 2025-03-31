@@ -6,9 +6,11 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 import { TCompleteProfile } from "@/types"
+import supabase from "@/utils/supabase"
 import { ZUserEditProfile } from "@/validation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
+import { toast } from "react-toastify"
 
 type Props = {
 	isOpen: boolean,
@@ -35,8 +37,22 @@ const EditUser = ({ isOpen, onClose, userData }: Props) => {
 		}
 	})
 
+
+
 	const handleSave = async (value: TCompleteProfile) => {
 		console.log(value, userData.id)
+		try {
+			const { error } = await supabase.from("users_details").update(value).eq("id", userData.id)
+
+			if(error) throw error
+
+			toast.success("Update Successfully")
+			onClose()
+
+		} catch (error) {
+			console.error(error)
+			toast.error("Update failed...")
+		}
 	}
 
 
