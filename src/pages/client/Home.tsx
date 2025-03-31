@@ -36,7 +36,7 @@ const Home = () => {
 				</Button>
 			</section>
 			<section className="text-brand-800 flex flex-col gap-4">
-				<h2 className="font-bold text-xl lg:text-2xl md:col-span-3 lg:col-span-4">Features 🤖</h2>
+				<h2 className="font-bold text-xl lg:text-2xl md:col-span-3 lg:col-span-4">Features 🚀</h2>
 				<ul className="grid text-sm gap-2 md:grid-cols-2 max-w-md">
 					{features.map(({ feature }, index) => <li key={`features-${index}`}>- {feature}</li>)}
 

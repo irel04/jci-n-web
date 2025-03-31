@@ -30,10 +30,13 @@ export type TBaseProfile = {
 }
 
 export type TCompleteProfile = TBaseProfile & {
-	id: string;
+	id?: string;
 	lng?: number,
 	lat?: number,
-	created_at: string,
-	auth_id: string,
+	created_at?: string,
+	auth_id?: string,
 	RFID?: string,
+	status?: string,
+	personal_id?: string,
 }
+

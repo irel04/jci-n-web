@@ -18,7 +18,7 @@ const tableHeader = [
   "Created at"
 ]
 
-const AdminHome = () => {
+const CurrentUsers = () => {
 
   const [users, setUsers] = useState<TCompleteProfile[] | null>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -28,7 +28,7 @@ const AdminHome = () => {
   const fetchUsers = async () => {
     try {
 
-      const { data, error } = await supabase.from("users_details").select("*").eq("status", "onboarding").order("created_at", { ascending: false })
+      const { data, error } = await supabase.from("users_details").select("*").neq("status", "onboarding").eq("is_admin", false).order("created_at", { ascending: false })
 
       if (error) throw error
 
@@ -76,10 +76,10 @@ const AdminHome = () => {
   return (
     <>
       {/* Header */}
-      <h1 className="hidden lg:block text-neutral-500 text-xl"> Admin / On-Boarding </h1>
+      <h1 className="hidden lg:block text-neutral-500 text-xl"> Admin / Current Users </h1>
       {users?.length === 0 ? <div className="flex-1 flex justify-center items-center flex-col gap-2">
         <h3 className="text-sm md:text-lg">Hey Admin! Nice to see you again</h3>
-        <p className="text-xs md:text-sm lg:text-base text-center">There is no current on-boarding user right now</p>
+        <p className="text-xs md:text-sm lg:text-base text-center">There is no current active user right now</p>
       </div> : <div className="max-w-full overflow-hidden mt-4  h-full flex">
         <Table className=" flex-1 w-max">
           <TableHeader className="bg-brand-700 ">
@@ -110,9 +110,9 @@ const AdminHome = () => {
         </Table>
       </div>}
 
-      {users && users.length!==0 && userId && <EditUser isOpen={isOpen} onClose={handleCloseUserDetail} userData={users.filter(item => item.id === userId)[0]}/>}
+      {users && users.length !==0 && userId && <EditUser isOpen={isOpen} onClose={handleCloseUserDetail} userData={users.filter(item => item.id === userId)[0]}/>}
     </>
   )
 }
 
-export default AdminHome
+export default CurrentUsers
