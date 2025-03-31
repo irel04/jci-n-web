@@ -22,6 +22,8 @@ const AdminHome = () => {
   const [users, setUsers] = useState<TCompleteProfile[] | null>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
+  const [userId, setUserId] = useState<string  | null>()
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -38,6 +40,16 @@ const AdminHome = () => {
 
     fetchUsers()
   }, [])
+
+  const handleOpenUserDetail = (id: string) => {
+    setIsOpen(true)
+    setUserId(id)
+  }
+
+  const handleCloseUserDetail = () => {
+    setIsOpen(false)
+    setUserId(null)
+  }
 
 
 
@@ -60,7 +72,7 @@ const AdminHome = () => {
           <TableBody>
             {users ? users.map((user, index) => {
               return (
-                <TableRow key={index} className="cursor-pointer" onClick={() => setIsOpen(true)}>
+                <TableRow key={index} className="cursor-pointer" onClick={() => handleOpenUserDetail(user.id ?? "")}>
                   <TableCell className="font-medium">{user.personal_id}</TableCell>
                   <TableCell>{`${user.first_name} ${user.last_name}`}</TableCell>
                   <TableCell>{user.birthdate}</TableCell>
@@ -77,7 +89,7 @@ const AdminHome = () => {
         </Table>
       </div>}
 
-      <EditUser isOpen={isOpen} onClose={() => setIsOpen(false)}/>
+      {users && users.length && userId && <EditUser isOpen={isOpen} onClose={handleCloseUserDetail} userData={users.filter(item => item.id === userId)[0]}/>}
     </>
   )
 }
