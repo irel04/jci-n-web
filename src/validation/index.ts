@@ -1,18 +1,20 @@
 import { z } from "zod"
 
-export const ZLogin = z.object({
+const NON_EMPTY_MESSAGE = "Field required"
+
+const ZLogin = z.object({
 	email: z.string().trim().email("Enter a valid email"),
 	password: z.string()
 })
 
 
-export const ZProfile = z.object({
-	first_name: z.string().nonempty("Field required"),
-	last_name: z.string().nonempty("Field required"),
-	birthdate: z.string().nonempty("Field required"),
-	phone_number: z.string().nonempty("Field required"),
-	address: z.string().nonempty("Field required"),
-	email_address: z.string().email().nonempty("Field required"),
+const ZProfile = z.object({
+	first_name: z.string().nonempty(NON_EMPTY_MESSAGE),
+	last_name: z.string().nonempty(NON_EMPTY_MESSAGE),
+	birthdate: z.string().nonempty(NON_EMPTY_MESSAGE),
+	phone_number: z.string().nonempty(NON_EMPTY_MESSAGE),
+	address: z.string().nonempty(NON_EMPTY_MESSAGE),
+	email_address: z.string().email().nonempty(NON_EMPTY_MESSAGE),
 	password: z.string()
 		.optional() // Allows the field to be empty (not required)
 		.or(z.literal("")) // Treats an empty string as valid
@@ -21,3 +23,21 @@ export const ZProfile = z.object({
 		})
 
 })
+
+const ZUserEditProfile = z.object({
+	first_name: z.string().nonempty(NON_EMPTY_MESSAGE),
+	last_name: z.string().nonempty(NON_EMPTY_MESSAGE),
+	birthdate: z.string().nonempty(NON_EMPTY_MESSAGE),
+	phone_number: z.string().nonempty(NON_EMPTY_MESSAGE),
+	address: z.string().nonempty(NON_EMPTY_MESSAGE),
+	email_address: z.string().email().nonempty(NON_EMPTY_MESSAGE),
+	status: z.string().nonempty(NON_EMPTY_MESSAGE),
+	RFID: z.string().nonempty(NON_EMPTY_MESSAGE),
+})
+
+
+export {
+	ZLogin,
+	ZProfile,
+	ZUserEditProfile
+}
