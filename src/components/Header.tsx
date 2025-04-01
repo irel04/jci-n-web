@@ -33,7 +33,7 @@ function Header() {
 				</a>
 				<NavigationMenu className="hidden md:block text-neutral-700 font-medium">
 					<NavigationMenuList>
-						<NavigationMenuLink >Home</NavigationMenuLink>
+						<NavigationMenuLink ><a href="/">Home</a></NavigationMenuLink>
 						<NavigationMenuItem>
 							<NavigationMenuTrigger>Our Team</NavigationMenuTrigger>
 							<NavigationMenuContent>
@@ -84,7 +84,7 @@ function Header() {
 				<p className="text-sm">Search...</p>
 				<Search color="#737373" size={18} className="" />
 			</button>
-			<CircleHelp color="#737373" size={18}/>
+			<a href="/faqs"><CircleHelp color="#737373" size={18}/></a>
 		</header>
 	)
 }

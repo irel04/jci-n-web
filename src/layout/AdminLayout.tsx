@@ -10,10 +10,12 @@ const AdminLayout = () => {
 	const is_admin = localStorage.getItem("is_admin") || false
 
 	const { pathname } = useLocation()	
+
+	console.log(session)
 		
 	if(session===undefined) return 
 
-	if(session === null &&  !is_admin) return <Navigate to="/"/>
+	if(session === null ||  !is_admin) return <Navigate to="/"/>
 
 	return (
 		<SidebarProvider>

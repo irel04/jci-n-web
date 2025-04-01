@@ -69,6 +69,8 @@ const AuthProvider = ({ children }: Props) => {
 
 		if (error) throw error
 
+		localStorage.removeItem("is_admin")
+
 		if (redirectTo) window.location.href = redirectTo
 
 	}
