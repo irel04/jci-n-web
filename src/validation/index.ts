@@ -37,10 +37,10 @@ const ZUserEditProfile = z.object({
 
 
 const ZSendUsEmail = z.object({
-	title: z.string().nonempty(NON_EMPTY_MESSAGE),
+	name: z.string().nonempty(NON_EMPTY_MESSAGE),
 	email: z.string().email().nonempty(NON_EMPTY_MESSAGE),
 	message: z.string().nonempty(NON_EMPTY_MESSAGE),
-
+	title: z.string().nonempty(NON_EMPTY_MESSAGE),
 })
 
 export {
