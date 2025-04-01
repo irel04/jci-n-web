@@ -1,11 +1,11 @@
 import { Session } from "@supabase/supabase-js";
 
-export type TLogin = {
+type TLogin = {
 	email: string;
 	password: string
 }
 
-export type TAuth = {
+type TAuth = {
 	login: (payload: TLogin) => Promise<void>;  // Always required
 	logout: (redirectTo?: string) => Promise<void>;          // Always required
 	session?: Session| null;
@@ -13,13 +13,13 @@ export type TAuth = {
 };
 
 
-export type TExtendedSession = Session & {
+type TExtendedSession = Session & {
 	is_admin?: boolean
 }
 
 
 
-export type TBaseProfile = {
+type TBaseProfile = {
 	email_address: string,
 	first_name: string;
 	last_name: string;
@@ -29,7 +29,7 @@ export type TBaseProfile = {
 	password?: string
 }
 
-export type TCompleteProfile = TBaseProfile & {
+type TCompleteProfile = TBaseProfile & {
 	id?: string;
 	lng?: number,
 	lat?: number,
@@ -40,3 +40,13 @@ export type TCompleteProfile = TBaseProfile & {
 	personal_id?: string,
 }
 
+
+type TFaqs = {
+	question: string,
+	answer: string,
+	id: string,
+	created_at: string
+}
+
+
+export type { TLogin, TAuth, TBaseProfile, TCompleteProfile, TExtendedSession, TFaqs }

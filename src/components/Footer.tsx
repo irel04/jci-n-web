@@ -56,7 +56,7 @@ const Footer = () => {
 					<li onClick={() => setIsContactUsOpen(true)} className="cursor-pointer">Contact Us</li>
 					<li><a href="/terms-and-conditions">Terms and Conditions</a></li>
 					<li><a href="/privacy-policy">Privacy Policy</a></li>
-					<li><a href="/faq">FAQs</a></li>
+					<li><a href="/faqs">FAQs</a></li>
 				</ul>
 				<div className="md:col-start-2 flex justify-end">
 					<Button variant={session ? "link" : "secondary"} className="text-xs" onClick={handleClickButton}>
