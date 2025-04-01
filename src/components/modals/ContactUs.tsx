@@ -26,13 +26,13 @@ type TEmail = {
 const ContactUs = ({ isOpen, onClose }: Props) => {
 
 
+
 	const { register, reset, handleSubmit, formState: { errors } } = useForm({
 		resolver: zodResolver(ZSendUsEmail),
 		mode: "onChange"
 	})
 
 	const handleSendUsEmail = (value: TEmail) => {
-		console.log(value)
 		emailjs
 			.send(import.meta.env.VITE_SERVICE_ID, import.meta.env.VITE_TEMPLATE_ID, value , {
 				publicKey: import.meta.env.VITE_PUBLIC_KEY,
@@ -48,6 +48,7 @@ const ContactUs = ({ isOpen, onClose }: Props) => {
 					toast.error("Failed sending message! Please try again.")
 				},
 			);
+		
 	}
 
 
