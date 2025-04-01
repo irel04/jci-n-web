@@ -7,7 +7,8 @@ const TermsConditions = () => {
 				<h1 className="font-bold text-2xl lg:text-4xl">Terms and Conditions</h1>
 				<div className="text-sm md:text-base flex flex-col gap-2">
 					<p >Last Updated: March 31, 2025</p>
-					<p>Welcome to Enhancing Garbage Management: <span className="font-bold">A Mobile-Integrated, Solar-Powered Waste Collection System</span>. These Terms and Conditions ("Terms") govern your use of the System, including the mobile application, hardware, and associated services. By accessing or using the System, you agree to comply with and be bound by these Terms.</p>
+					<p>Welcome to <span className="font-bold">Enhancing Garbage Waste Collection: A Mobile Integration Solar Powered System
+					</span>. These Terms and Conditions ("Terms") govern your use of the System, including the mobile application, hardware, and associated services. By accessing or using the System, you agree to comply with and be bound by these Terms.</p>
 				</div>
 			</section>
 

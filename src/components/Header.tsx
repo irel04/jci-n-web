@@ -33,7 +33,7 @@ function Header() {
 				</a>
 				<NavigationMenu className="hidden md:block text-neutral-700 font-medium">
 					<NavigationMenuList>
-						<NavigationMenuLink >Home</NavigationMenuLink>
+						<NavigationMenuLink ><a href="/">Home</a></NavigationMenuLink>
 						<NavigationMenuItem>
 							<NavigationMenuTrigger>Our Team</NavigationMenuTrigger>
 							<NavigationMenuContent>
