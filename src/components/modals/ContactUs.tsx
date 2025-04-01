@@ -65,12 +65,12 @@ const ContactUs = ({ isOpen, onClose }: Props) => {
 						<Input {...register("email")} className={`${errors.email ? "border-red-500 border-[1.2px]" : ""}`}/>
 					</div>
 					<div className="flex flex-col gap-2">
-						<Label htmlFor="title">Title</Label>
-						<Input {...register("title")} className={`${errors.title ? "border-red-500 border-[1.2px]" : ""}`}/>
-					</div>
-					<div className="flex flex-col gap-2">
 						<Label htmlFor="Name">Name</Label>
 						<Input  {...register("name")} className={`${errors.name ? "border-red-500 border-[1.2px]" : ""}`}/>
+					</div>
+					<div className="flex flex-col gap-2">
+						<Label htmlFor="title">Title</Label>
+						<Input {...register("title")} className={`${errors.title ? "border-red-500 border-[1.2px]" : ""}`}/>
 					</div>
 					<div className="flex flex-col gap-2">
 						<Label htmlFor="message">Message</Label>
