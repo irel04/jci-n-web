@@ -84,7 +84,7 @@ function Header() {
 				<p className="text-sm">Search...</p>
 				<Search color="#737373" size={18} className="" />
 			</button>
-			<CircleHelp color="#737373" size={18}/>
+			<a href="/faqs"><CircleHelp color="#737373" size={18}/></a>
 		</header>
 	)
 }
