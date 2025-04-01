@@ -1,7 +1,7 @@
 
 const PrivacyPolicy = () => {
 	return (
-		<main className="w-full">
+		<main className="w-full text-neutral-700">
 			{/* Header Section */}
 			<section className="flex flex-col sm:max-w-md lg:max-w-2xl gap-4">
 				<h1 className="font-bold text-2xl lg:text-4xl">Privacy Policy</h1>

@@ -45,14 +45,14 @@ const Footer = () => {
 		<>
 			<Login isOpen={isOpen} handleClose={() => setIsOpen(false)}/>
 			<ContactUs isOpen={isContactUsOpen} onClose={handleCloseContactUs}/>
-			<footer className="border-t-neutral-500/50 border-t-[1px] py-4 px-8 grid gap-4 md:grid-cols-2 text-sm md:text-base w-full">
-				<div className="flex flex-col gap-2 text-neutral-500/85 text-xs md:text-sm">
+			<footer className="border-t-neutral-500/50 border-t-[1px] py-4 px-8 grid gap-4 md:grid-cols-2 text-sm md:text-base w-full text-neutral-700">
+				<div className="flex flex-col gap-2  text-xs md:text-sm">
 					<a href="/"><img src={webLogo} alt="" className="w-28" /></a>
 					<p>This is a mobile and web application developed for a research project titled <span className="font-bold">Enhancing Garbage Waste Collection: A Mobile Integration Solar Powered System
 					</span>.</p>
 					<p>Deployed at <span className="font-bold">Vercel</span></p>
 				</div>
-				<ul className="flex text-xs flex-col md:flex-row md:text-sm gap-1 md:gap-4 text-neutral-500/80">
+				<ul className="flex text-xs flex-col md:flex-row md:text-sm gap-1 md:gap-4 ">
 					<li onClick={() => setIsContactUsOpen(true)} className="cursor-pointer">Contact Us</li>
 					<li><a href="/terms-and-conditions">Terms and Conditions</a></li>
 					<li><a href="/privacy-policy">Privacy Policy</a></li>

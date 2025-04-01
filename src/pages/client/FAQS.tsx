@@ -38,7 +38,7 @@ const FAQS = () => {
 
 			{/* FAQ Section */}
 			<section className="text-sm md:text-base flex flex-col gap-4 mt-8">
-				<Accordion type="single" collapsible className="max-w-[800px] w-full">
+				<Accordion type="multiple" className="max-w-[800px] w-full">
 					{faqs ? faqs.map((item, index) => {
 						return <AccordionItem value={`item-${index + 1}`}>
 						<AccordionTrigger className="lg:text-lg">{item.question}</AccordionTrigger>
