@@ -49,4 +49,13 @@ type TFaqs = {
 }
 
 
-export type { TLogin, TAuth, TBaseProfile, TCompleteProfile, TExtendedSession, TFaqs }
+type TApkVersions = {
+	id: string,
+	version: string,
+	notes: string,
+	link: string,
+	created_at: string
+}
+
+
+export type { TLogin, TAuth, TBaseProfile, TCompleteProfile, TExtendedSession, TFaqs, TApkVersions }
