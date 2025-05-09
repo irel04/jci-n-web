@@ -1,6 +1,7 @@
 // Client
 export { default as Home } from "@/pages/client/Home";
 export {default as EditProfile} from "@/pages/client/EditProfile";
+export {default as Summary} from "@/pages/client/Summary"
 
 
 // Admin

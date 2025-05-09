@@ -2,7 +2,7 @@ import AuthProvider from "@/auth/AuthProvider"
 import AdminLayout from "@/layout/AdminLayout"
 import ClientLayout from "@/layout/ClientLayout"
 import Layout from "@/layout/Layout"
-import { AdminHome, CurrentUsers, EditProfile, EmbeddedSystem, Home, NotFound } from "@/pages"
+import { AdminHome, CurrentUsers, EditProfile, EmbeddedSystem, Home, NotFound, Summary } from "@/pages"
 import FAQS from "@/pages/client/FAQS"
 import PrivacyPolicy from "@/pages/client/PrivacyPolicy"
 import TermsConditions from "@/pages/client/TermsConditions"
@@ -23,6 +23,7 @@ function App() {
             <Route path="/terms-and-conditions" element={<TermsConditions/>}/>
             <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
             <Route path="/faqs" element={<FAQS/>}/>
+            <Route path="/summary" element={<Summary/>}/>
 
           </Route>
 
