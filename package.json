@@ -23,7 +23,6 @@
     "@react-input/mask": "^2.0.4",
     "@supabase/supabase-js": "^2.49.1",
     "@tailwindcss/vite": "^4.0.14",
-    "ai21": "^1.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
